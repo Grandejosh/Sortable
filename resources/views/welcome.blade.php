@@ -388,8 +388,7 @@
             font-family: 'Nunito', sans-serif;
         }
     </style>
-    @livewireScripts()
-<script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.5/cdn.js"
         integrity="sha512-1fAkW3wqng/WNu86nQEgW3/RuPns2JxdC6WwCFJhqB/fL9VIWduIJmktYGrlBu99aoxwmWKCLY4AHlzDsh6LqA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -404,6 +403,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
     @livewireStyles()
+    @livewireScripts()
 </head>
 
 <body class="antialiased">
