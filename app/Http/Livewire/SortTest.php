@@ -1,28 +1,49 @@
 <?php
 
 namespace App\Http\Livewire;
+
 use Livewire\Component;
-use OpenAI;
+use OpenAI\Laravel\Facades\OpenAI;
 
 class SortTest extends Component
 {
 
-    protected $API_KEY = "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";
+    public $frase_text;
+    public $result_text="aquí va el resultado";
+    public $query_tokens=0;
+    public $result_tokens=0;
+    public $consumed_tokens=0;
+    public $parafrasear=false;
+    public $modelo="text-ada-001";
 
-    public function openai(){
-        $client = OpenAI::client($this->API_KEY);
-    }
-    public function render()
+
+        public function render()
     {
-        return view('livewire.sort-test');
+       return view('livewire.sort-test');
     }
 
-    public function handleOnSortOrderChanged($sortOrder, $previousSortOrder, $name, $from, $to)
-{
-    // $sortOrder = new keys order
-    // $previousSortOrder = keys previous order
-    // $name = drop target name
-    // $from = name of drop target from where the dragged/sorted item came from
-    // $to = name of drop target to where the dragged/sorted item was placed
-}
+    public function save()
+    {
+        $max_tokens=1500;
+        if($this->modelo=="text-davinci-003")$max_tokens=3000;
+
+        $this->result_text="espera el resultado...";
+        if($this->parafrasear){
+            $consulta= "parafrasea lo contenido entre los corchetes: [".$this->frase_text."]";
+        }else{
+            $consulta= $this->frase_text;
+        }
+        $result = OpenAI::completions()->create([
+            'model' => $this->modelo,
+            'prompt' => $consulta,
+            'max_tokens' => $max_tokens,
+        ]);
+        $this->result_text = $result['choices'][0]['text'];
+        $this->query_tokens = $result['usage']['prompt_tokens'];
+        $this->result_tokens = $result['usage']['completion_tokens'];
+        $this->consumed_tokens = $result['usage']['total_tokens'];
+    }
+    public function alert(){
+        echo"<script>alert('carajo');</script>";
+    }
 }

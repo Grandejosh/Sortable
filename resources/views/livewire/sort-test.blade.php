@@ -2,15 +2,49 @@
 
 
 
-<!-- UIkit CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css" />
-
-<!-- UIkit JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
+<div class="uk-card uk-card-default uk-card-body">
+<form wire:submit.prevent='save'>
+    <input class="uk-form-controls" type="checkbox" wire:model="parafrasear" name="" id=""><p class="uk-text-bold">parafrasear</p>
 
 
+    <div class="uk-form-controls">
+        <label class="uk-label-danger">Escoge el modelo de IA a usar</label><br>
+        <input type="radio" name="valor" value="text-davinci-003" wire:model="modelo"> Da Vinci ++++
+        <input type="radio" name="valor" value="text-curie-001" wire:model="modelo"> Curie +++
+        <input type="radio" name="valor" value="text-babbage-001" wire:model="modelo"> Babbage ++
+        <input type="radio" name="valor" value="text-ada-001" wire:model="modelo"> Ada +
+    </div>
+
+
+    <textarea class="uk-input uk-text-primary uk-text-justify uk-form-controls" style="height: 150px" type="text" name="frase_text" id="frase_text" wire:model="frase_text" cols="30" rows="30" height="250px"></textarea>
+
+    <button class="uk-button-large uk-flex-center" type="submit" wire:loading.attr="disabled" wire:target="save" wire:click.prevent="save" >Consultar</button>
+
+</form>
+<p><h1>{{ $result_text }}</h1></p><br>
+<hr>
+<label class="uk-alert-success">Tokens Consumidos en la consulta</label>
+<p>{{ $query_tokens }}</p><br><hr>
+
+<label class="uk-alert-success">Tokens Consumidos en la respuesta actual</label>
+<p>{{ $result_tokens }}</p><br><hr>
+
+<label class="uk-alert-success">Suma Total de Tokens Consumidos en esta oportunidad</label>
+<p>{{ $consumed_tokens }}</p><br><hr>
+</div>
+
+<p>Modelo usado: {{ $modelo }}</p>
+</div>
+
+
+
+
+<!--
+
+
+
+
+<hr>
 <ul class="uk-child-width-1-6" uk-sortable="handle: .uk-card" uk-grid>
     <li>
         <div class="uk-card uk-card-default uk-card-body"><img src="https://www.dzoom.org.es/wp-content/uploads/2011/08/insp-cuadradas-1.jpg" alt=""></div>
@@ -111,3 +145,4 @@ function helper()
 </script>
 
 </div>
+-->
