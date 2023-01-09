@@ -21,19 +21,21 @@
     <button class="uk-button-large uk-flex-center" type="submit" wire:loading.attr="disabled" wire:target="save" wire:click.prevent="save" >Consultar</button>
 
 </form>
-<p><h1>{{ $result_text }}</h1></p><br>
+<p>{{ $result_text }}</p><br>
 <hr>
 <label class="uk-alert-success">Tokens Consumidos en la consulta</label>
-<p>{{ $query_tokens }}</p><br><hr>
+<p>{{ $query_tokens }}</p><hr>
 
 <label class="uk-alert-success">Tokens Consumidos en la respuesta actual</label>
-<p>{{ $result_tokens }}</p><br><hr>
+<p>{{ $result_tokens }}</p><hr>
 
 <label class="uk-alert-success">Suma Total de Tokens Consumidos en esta oportunidad</label>
-<p>{{ $consumed_tokens }}</p><br><hr>
+<p>{{ $consumed_tokens }}</p><hr>
 </div>
 
 <p>Modelo usado: {{ $modelo }}</p>
+</div>
+<p>motivo de termino de respuesta: {{ $finish_reason }}</p>
 </div>
 
 
